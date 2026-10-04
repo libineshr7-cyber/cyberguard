@@ -1,0 +1,7 @@
+<ol class="timeline" aria-label="Case progress">
+  <c:forEach var="s" items="${statuses}">
+    <li class="${s.step lt incident.status.step ? 'done' : (s.step eq incident.status.step ? 'current' : '')}">
+      <span class="dot"></span><span class="tl-label"><c:out value="${s.label}"/></span>
+    </li>
+  </c:forEach>
+</ol>

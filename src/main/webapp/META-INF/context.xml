@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+  <!-- SameSite=Lax session cookie reduces CSRF risk -->
+  <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor" sameSiteCookies="lax"/>
+  <!-- Understands X-Forwarded-* headers when deployed behind a cloud proxy / HTTPS load balancer -->
+  <Valve className="org.apache.catalina.valves.RemoteIpValve"/>
+</Context>

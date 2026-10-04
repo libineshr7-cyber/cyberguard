@@ -1,0 +1,17 @@
+<div class="table-wrap">
+<table class="tbl">
+  <thead><tr><th>Case ID</th><th>Incident Type</th><th>Date</th><th>Status</th><th>View</th></tr></thead>
+  <tbody>
+  <c:forEach var="i" items="${incidents}">
+    <tr>
+      <td><strong><c:out value="${i.caseId}"/></strong><c:if test="${i.demo}"> <span class="demo-tag">DEMO</span></c:if></td>
+      <td><c:out value="${i.incidentType}"/></td>
+      <td><fmt:formatDate value="${i.createdAt}" pattern="dd MMM yyyy"/></td>
+      <td><span class="badge s-${i.status.cssClass}"><c:out value="${i.status.label}"/></span></td>
+      <td><a class="btn btn-sm btn-ghost" href="${ctx}/user/case?caseId=${i.caseId}">View</a></td>
+    </tr>
+  </c:forEach>
+  <c:if test="${empty incidents}"><tr><td colspan="5" class="muted">No reports yet. <a href="${ctx}/report">Report an incident</a>.</td></tr></c:if>
+  </tbody>
+</table>
+</div>

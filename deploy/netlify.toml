@@ -1,0 +1,11 @@
+# OPTIONAL: only a reverse-proxy. Netlify cannot run Java/Tomcat/MySQL.
+# Put this file in a folder with an empty "public" directory, deploy that folder to Netlify,
+# replace YOUR-BACKEND-URL with the URL of your Tomcat host (e.g. https://cyberguard.onrender.com).
+[build]
+  publish = "public"
+
+[[redirects]]
+  from = "/*"
+  to = "https://YOUR-BACKEND-URL/:splat"
+  status = 200
+  force = true

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><c:out value="${empty pageTitle ? 'Home' : pageTitle}"/> | CyberGuard</title>
+<link rel="stylesheet" href="${ctx}/css/style.css">
+<link rel="icon" type="image/svg+xml" href="${ctx}/images/logo.svg">
+<script src="${ctx}/js/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="${ctx}/home"><img src="${ctx}/images/logo.svg" alt="" width="30" height="30"><span>Cyber<b>Guard</b></span></a>
+    <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="${ctx}/home">Home</a>
+      <a href="${ctx}/report">Report Incident</a>
+      <a href="${ctx}/track">Track Case</a>
+      <a href="${ctx}/about">About</a>
+      <a href="${ctx}/contact">Contact</a>
+      <c:choose>
+        <c:when test="${empty sessionScope.user}"><a class="btn btn-sm" href="${ctx}/login">Login</a></c:when>
+        <c:otherwise>
+          <a href="${ctx}${sessionScope.user.dashboardPath}"><c:out value="${sessionScope.user.staff ? 'Admin Panel' : 'My Dashboard'}"/></a>
+          <a class="btn btn-sm btn-ghost" href="${ctx}/logout">Logout</a>
+        </c:otherwise>
+      </c:choose>
+    </nav>
+  </div>
+</header>
+<main id="main" class="container">
+<c:if test="${not empty sessionScope.flashSuccess}"><div class="alert ok" role="status"><c:out value="${sessionScope.flashSuccess}"/></div><c:remove var="flashSuccess" scope="session"/></c:if>
+<c:if test="${not empty sessionScope.flashError}"><div class="alert err" role="alert"><c:out value="${sessionScope.flashError}"/></div><c:remove var="flashError" scope="session"/></c:if>
+<c:if test="${not empty error}"><div class="alert err" role="alert"><c:out value="${error}"/></div></c:if>
